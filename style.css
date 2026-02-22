@@ -1,0 +1,506 @@
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-image: url('gambar 1.png');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    color: #1a1a1a;
+    line-height: 1.6;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradasi samar: Gelap di atas & bawah, lebih transparan di tengah */
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.8) 0%,
+            rgba(0, 0, 0, 0.4) 40%,
+            rgba(0, 0, 0, 0.4) 60%,
+            rgba(0, 0, 0, 0.8) 100%);
+    z-index: -1;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+/* Header */
+header {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 900;
+}
+
+.logo a {
+    text-decoration: none;
+    color: #1a1a1a;
+}
+
+.logo span {
+    color: #ff6600;
+    /* Orange Accent */
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #444444;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+nav ul li a:hover {
+    color: #ff6600;
+}
+
+/* Hero Section */
+.hero {
+    background: transparent;
+    /* Shared global background */
+    height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffffff;
+    padding-top: 200px;
+    /* Diturunkan sedikit lagi sesuai permintaan */
+}
+
+.hero h1 {
+    font-size: 4.5rem;
+    /* Ukuran diperbesar sesuai permintaan */
+    margin-bottom: 25px;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+    font-size: 1.5rem;
+    /* Ukuran diperbesar sesuai permintaan */
+    margin-bottom: 40px;
+    color: #ffffff;
+    max-width: 950px;
+    font-weight: 500;
+}
+
+.hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-main {
+    background: #25D366;
+    /* WhatsApp Green */
+    color: #ffffff;
+    padding: 20px 45px;
+    /* Larger padding */
+    border-radius: 8px;
+    /* Slightly more rounded */
+    text-decoration: none;
+    font-weight: 800;
+    /* Bolder font */
+    font-size: 1.4rem;
+    /* Larger font size */
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.btn-main:hover {
+    background: #1ebea5;
+    /* Darker WA Green */
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+}
+
+/* Pricing Cards */
+.pricing {
+    padding: 100px 0;
+    background: transparent;
+    /* Shared global background */
+    position: relative;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #ffffff;
+    /* White for better contrast on dark overlay */
+    letter-spacing: -0.5px;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* Force 1 column downwards */
+    gap: 30px;
+    max-width: 600px;
+    /* Limits width to keep it neat */
+    margin: 0 auto;
+    /* Centers the single column */
+    position: relative;
+    z-index: 2;
+}
+
+/* Background Decorations */
+.bg-decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.decor-item {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.5);
+    /* Increased from 0.2 to 0.5 */
+    font-size: 4rem;
+    opacity: 0.3;
+    /* Increased from 0.15 to 0.3 */
+    animation: float 15s infinite ease-in-out;
+}
+
+.decor-1 {
+    top: 10%;
+    left: 5%;
+    font-size: 6rem;
+    animation-delay: 0s;
+}
+
+.decor-2 {
+    top: 30%;
+    right: 5%;
+    font-size: 5rem;
+    animation-delay: -2s;
+}
+
+.decor-3 {
+    top: 60%;
+    left: 8%;
+    font-size: 4rem;
+    animation-delay: -5s;
+}
+
+.decor-4 {
+    top: 80%;
+    right: 10%;
+    font-size: 5.5rem;
+    animation-delay: -8s;
+}
+
+.decor-5 {
+    top: 45%;
+    left: 12%;
+    font-size: 3rem;
+    animation-delay: -3s;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-30px) rotate(10deg);
+    }
+}
+
+.card {
+    padding: 45px 35px;
+    border-radius: 16px;
+    text-align: center;
+    border: none;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Pastel Level Backgrounds */
+.level-1 {
+    background-color: #379650;
+    border-color: #379650;
+}
+
+.level-2 {
+    background-color: #3a6f95;
+    border-color: #3a6f95;
+}
+
+.level-3 {
+    background-color: #8a348a;
+    border-color: #8a348a;
+}
+
+.level-4 {
+    background-color: #cfa11b;
+    border-color: #cfa11b;
+}
+
+.level-5 {
+    background-color: #7f2739;
+    border-color: #7f2739;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.card.featured {
+    border: 2px solid #ff6600;
+    position: relative;
+    overflow: hidden;
+}
+
+.card.featured::after {
+    content: 'Special';
+    position: absolute;
+    top: 15px;
+    right: -30px;
+    background: #ff6600;
+    color: #ffffff;
+    padding: 5px 40px;
+    transform: rotate(45deg);
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.card-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.price {
+    font-size: 2.2rem;
+    color: #ffffff;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.price span {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.card ul {
+    list-style: none;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.card ul li {
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: #ffffff;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+    padding-bottom: 10px;
+}
+
+.card ul li i {
+    color: #ffffff;
+    margin-right: 12px;
+}
+
+.btn-order {
+    display: block;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+    color: #ffffff;
+    padding: 22px;
+    /* Larger padding */
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 1.25rem;
+    /* Explicit and larger font size */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-order:hover {
+    background: #ff6600;
+    border-color: #ff6600;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(255, 102, 0, 0.4);
+}
+
+/* Reviews Styling */
+.reviews {
+    padding: 100px 0;
+    background: transparent;
+}
+
+.review-card {
+    background: rgba(255, 255, 255, 0.1);
+    /* Very subtle transparent cards */
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.stars {
+    color: #ff6600;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.review-card p {
+    font-style: italic;
+    color: #ffffff;
+    /* Contrast against dark background */
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.author {
+    font-weight: 700;
+    color: #ff6600;
+    /* Use brand color for author */
+    font-size: 0.9rem;
+}
+
+.coverage {
+    padding: 100px 0;
+    background: transparent;
+}
+
+.coverage-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.coverage-list span {
+    background: #ffffff;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #333333;
+    display: flex;
+    align-items: center;
+    border: 1px solid #eeeeee;
+    transition: 0.3s;
+}
+
+.coverage-list span:hover {
+    border-color: #ff6600;
+    color: #ff6600;
+}
+
+.coverage-list span i {
+    color: #ff6600;
+    margin-right: 10px;
+}
+
+/* Floating WA */
+.floating-wa {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #25D366;
+    /* WhatsApp Green */
+    color: #ffffff;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: 0.3s;
+}
+
+.floating-wa:hover {
+    transform: scale(1.1);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .hero h1 {
+        font-size: 2.22rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    nav {
+        display: none;
+    }
+}
