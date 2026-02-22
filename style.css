@@ -531,12 +531,17 @@ nav ul li a:hover {
         padding: 10px 8px;
         /* Micro-scale padding */
         border-radius: 8px;
+        transform: scale(0.98);
+        /* Subtle scale down */
+        margin: 0 auto;
     }
 
     .card-grid {
         gap: 8px;
         /* Micro-scale gap */
-        max-width: 400px;
+        max-width: 320px;
+        /* More aggressive max-width */
+        margin: 0 auto;
     }
 
     .price {
