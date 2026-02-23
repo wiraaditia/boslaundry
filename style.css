@@ -579,17 +579,52 @@ nav ul li a:hover {
         display: none;
     }
 
-    /* Dedicated background for mobile */
+    /* Global fixed background for mobile */
     body {
-        background-image: url('gambar 2.png');
-        background-attachment: scroll;
+        background-image: url('file2.png');
+        background-attachment: fixed;
         background-position: center;
         background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    /* Keep overlay for readability but make it global */
+    body::before {
+        display: block;
+        background: rgba(0, 0, 0, 0.4);
+        /* Subtle darkening for all sections */
+        backdrop-filter: blur(1px);
+    }
+
+    /* Make all sections transparent to show background */
+    .hero,
+    .pricing,
+    .reviews,
+    .coverage {
+        background: transparent !important;
+    }
+
+    .hero {
+        height: auto;
+        min-height: 85vh;
+        padding-top: 160px;
+        /* Space for nav */
+        padding-bottom: 80px;
+    }
+
+    .hero::before {
+        display: none;
+        /* Remove localized hero bg */
     }
 }
 
 /* Extra Small Devices (Under 480px) */
 @media (max-width: 480px) {
+    .hero {
+        min-height: 70vh;
+        padding-top: 140px;
+    }
+
     .hero h1 {
         font-size: 1.5rem;
     }
