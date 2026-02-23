@@ -579,21 +579,42 @@ nav ul li a:hover {
         display: none;
     }
 
-    /* Global fixed background for mobile */
+    /* iOS-Friendly Global fixed background */
     body {
+        background: none !important;
+        /* Reset standard bg */
+    }
+
+    /* Fixed background container for mobile */
+    body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background-image: url('file2.png');
-        background-attachment: fixed;
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
+        z-index: -2;
+        /* Behind everything */
     }
 
-    /* Keep overlay for readability but make it global */
+    /* Keep overlay for readability but make it global and fixed */
     body::before {
         display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background: rgba(0, 0, 0, 0.4);
-        /* Subtle darkening for all sections */
+        /* Subtle darkening */
         backdrop-filter: blur(1px);
+        z-index: -1;
+        /* Above image, below content */
+        content: '';
     }
 
     /* Make all sections transparent to show background */
@@ -610,6 +631,7 @@ nav ul li a:hover {
         padding-top: 160px;
         /* Space for nav */
         padding-bottom: 80px;
+        position: relative;
     }
 
     .hero::before {
