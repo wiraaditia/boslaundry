@@ -1,12 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bos Laundry Pro - Premium Laundry Specialist</title>
+    <title>Bos Laundry Pro - Laundry Terdekat di Pemogan & Denpasar Bali</title>
+    <meta name="description"
+        content="Mencari laundry terdekat di Pemogan atau Denpasar? Bos Laundry Pro adalah spesialis laundry express 2-12 jam terbaik di Bali. Gratis antar jemput, hasil bersih, harum, dan rapi. Pesan sekarang!">
+    <meta name="keywords"
+        content="laundry terdekat, laundry pemogan, laundry denpasar, laundry di dekat saya, laundry bali, laundry express bali, cuci baju bali, laundry kiloan bali, bos laundry pro, laundry sepatu bali, laundry antar jemput bali">
+    <meta name="author" content="Bos Laundry Pro">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://boslaundrypro.com/">
+    <meta property="og:title" content="Bos Laundry Pro - Laundry Express Terbaik di Bali">
+    <meta property="og:description"
+        content="Layanan laundry kilat 2 jam jadi dengan garansi tepat waktu. Gratis antar jemput wilayah Bali.">
+    <meta property="og:image" content="gambar 1.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=1.5">
+    <link rel="stylesheet" href="style.css?v=1.6">
     <link rel="icon" type="image/png" href="favicon.png?v=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta name="google-site-verification" content="wkPzgdJNNWJVWKCI809KUicb-bMhoUBdTa0yoYygFDk" />
@@ -19,6 +33,8 @@
 
         gtag('config', 'AW-637852473');
     </script>
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body id="top">
@@ -28,9 +44,10 @@
             <div class="logo"><a href="#top">BOS LAUNDRY <span>PRO</span></a></div>
             <nav>
                 <ul>
-                    <li><a href="#top">Home</a></li>
-                    <li><a href="#services">Our Services</a></li>
-                    <li><a href="#coverage">Contact</a></li>
+                    <li><a href="#top">Beranda</a></li>
+                    <li><a href="#services">Layanan Kami</a></li>
+                    <li><a href="#location">Lokasi</a></li>
+                    <li><a href="#coverage">Kontak</a></li>
                 </ul>
             </nav>
         </div>
@@ -38,10 +55,10 @@
 
     <section class="hero">
         <div class="hero-content">
-            <h1>Expert 24/7 Express Laundry in Bali</h1>
-            <p>High Quality, Fast Booking, & Always Open. Free Delivery Included.</p>
+            <h1>Laundry Ekspres 24/7 di Bali</h1>
+            <p>Kualitas Tinggi, Pemesanan Cepat, & Selalu Buka. Termasuk Gratis Antar Jemput.</p>
             <a href="https://wa.me/6281233451988?text=Halo%20Bos%20Laundry%20Pro!%20Saya%20ingin%20booking%20laundry%20di%20Bali."
-                class="btn-main">BOOK NOW</a>
+                class="btn-main">PESAN SEKARANG</a>
         </div>
     </section>
 
@@ -54,95 +71,99 @@
             <i class="fas fa-cloud decor-item decor-5"></i>
         </div>
         <div class="container">
-            <h2 class="section-title">Our Premium Services</h2>
-            <div class="card-grid">
+            <h2 class="section-title">Layanan Premium Kami</h2>
+            <div class="card-grid" id="package-container">
+                <!-- Data akan dimuat dari Supabase atau Fallback -->
                 <div class="card level-1">
-                    <div class="card-header">EXPRESS 12-Hour</div>
+                    <div class="card-header">EXPRESS 12 Jam</div>
                     <div class="price">IDR 24.000 <span>/kg</span></div>
                     <ul>
-                        <li><i class="fas fa-check"></i> Express 12-Hour Turnaround</li>
-                        <li><i class="fas fa-check"></i> Free Pick-Up & Delivery</li>
-                        <li><i class="fas fa-check"></i> Includes: Washing, Drying, Ironing, Plastic Packing</li>
-                        <li><i class="fas fa-check"></i> 1 Machine Per Customer</li>
+                        <li><i class="fas fa-check"></i> Selesai dalam 12 Jam</li>
+                        <li><i class="fas fa-check"></i> Gratis Antar Jemput</li>
+                        <li><i class="fas fa-check"></i> Termasuk: Cuci, Kering, Setrika, Packing</li>
+                        <li><i class="fas fa-check"></i> 1 Mesin Per Pelanggan</li>
                     </ul>
-                    <a href="https://wa.me/6281233451988?text=Halo%20Bos%20Laundry%20Pro!%20Saya%20ingin%20memesan%20paket%20*EXPRESS%2012-Hour*."
-                        class="btn-order">Order Now</a>
+                    <a href="https://wa.me/6281233451988?text=Halo%20Bos%20Laundry%20Pro!%20Saya%20ingin%20memesan%20paket%20*EXPRESS%2012%20Jam*."
+                        class="btn-order">Pesan Sekarang</a>
                 </div>
 
                 <div class="card level-2">
-                    <div class="card-header">EXPRESS 6-Hour</div>
+                    <div class="card-header">EXPRESS 6 Jam</div>
                     <div class="price">IDR 29.000 <span>/kg</span></div>
                     <ul>
-                        <li><i class="fas fa-check"></i> Express 6-Hour Turnaround</li>
-                        <li><i class="fas fa-check"></i> Free Pick-Up & Delivery</li>
-                        <li><i class="fas fa-check"></i> Includes: Washing, Drying, Ironing, Plastic Packing</li>
-                        <li><i class="fas fa-check"></i> 1 Machine Per Customer</li>
+                        <li><i class="fas fa-check"></i> Selesai dalam 6 Jam</li>
+                        <li><i class="fas fa-check"></i> Gratis Antar Jemput</li>
+                        <li><i class="fas fa-check"></i> Termasuk: Cuci, Kering, Setrika, Packing</li>
+                        <li><i class="fas fa-check"></i> 1 Mesin Per Pelanggan</li>
                     </ul>
-                    <a href="https://wa.me/6281233451988?text=Halo%20Bos%20Laundry%20Pro!%20Saya%20ingin%20memesan%20paket%20*EXPRESS%206-Hour*."
-                        class="btn-order">Order Now</a>
+                    <a href="https://wa.me/6281233451988?text=Halo%20Bos%20Laundry%20Pro!%20Saya%20ingin%20memesan%20paket%20*EXPRESS%206%20Jam*."
+                        class="btn-order">Pesan Sekarang</a>
                 </div>
 
                 <div class="card level-3">
-                    <div class="card-header">EXPRESS 3-Hour</div>
+                    <div class="card-header">EXPRESS 3 Jam</div>
                     <div class="price">IDR 39.000 <span>/kg</span></div>
                     <ul>
-                        <li><i class="fas fa-check"></i> Express 3-Hour Turnaround</li>
-                        <li><i class="fas fa-check"></i> Free Pick-Up & Delivery</li>
-                        <li><i class="fas fa-check"></i> Includes: Washing, Drying, Ironing, Plastic Packing</li>
-                        <li><i class="fas fa-check"></i> 1 Machine Per Customer</li>
+                        <li><i class="fas fa-check"></i> Selesai dalam 3 Jam</li>
+                        <li><i class="fas fa-check"></i> Gratis Antar Jemput</li>
+                        <li><i class="fas fa-check"></i> Termasuk: Cuci, Kering, Setrika, Packing</li>
+                        <li><i class="fas fa-check"></i> 1 Mesin Per Pelanggan</li>
                     </ul>
-                    <a href="https://wa.me/6281233451988?text=Halo%20Bos%20Laundry%20Pro!%20Saya%20ingin%20memesan%20paket%20*EXPRESS%203-Hour*."
-                        class="btn-order">Order Now</a>
+                    <a href="https://wa.me/6281233451988?text=Halo%20Bos%20Laundry%20Pro!%20Saya%20ingin%20memesan%20paket%20*EXPRESS%203%20Jam*."
+                        class="btn-order">Pesan Sekarang</a>
                 </div>
 
                 <div class="card level-4 featured">
-                    <div class="card-header">ULTRA 2-Hour</div>
+                    <div class="card-header">ULTRA 2 Jam</div>
                     <div class="price">IDR 49.000 <span>/kg</span></div>
                     <ul>
-                        <li><i class="fas fa-bolt"></i> Express 2-Hour Turnaround</li>
-                        <li><i class="fas fa-check"></i> Free Pick-Up & Delivery</li>
-                        <li><i class="fas fa-check"></i> Includes: Washing, Drying, Ironing, Plastic Packing</li>
-                        <li><i class="fas fa-check"></i> On-Time Guarantee</li>
+                        <li><i class="fas fa-bolt"></i> Selesai dalam 2 Jam</li>
+                        <li><i class="fas fa-check"></i> Gratis Antar Jemput</li>
+                        <li><i class="fas fa-check"></i> Termasuk: Cuci, Kering, Setrika, Packing</li>
+                        <li><i class="fas fa-check"></i> Garansi Tepat Waktu</li>
                     </ul>
-                    <a href="https://wa.me/6281233451988?text=Halo%20Bos%20Laundry%20Pro!%20Saya%20ingin%20memesan%20paket%20*ULTRA%202-Hour*."
-                        class="btn-order">Order Now</a>
+                    <a href="https://wa.me/6281233451988?text=Halo%20Bos%20Laundry%20Pro!%20Saya%20ingin%20memesan%20paket%20*ULTRA%202%20Jam*."
+                        class="btn-order">Pesan Sekarang</a>
                 </div>
 
                 <div class="card level-5">
                     <div class="card-header">SHOES Restore</div>
-                    <div class="price">IDR 39.000 <span>/Pair</span></div>
+                    <div class="price">IDR 39.000 <span>/Pasang</span></div>
                     <ul>
-                        <li><i class="fas fa-check"></i> Express 12-Hour Turnaround</li>
-                        <li><i class="fas fa-check"></i> Free Pick-Up & Delivery</li>
-                        <li><i class="fas fa-check"></i> Includes: Washing, Drying, Plastic Packing</li>
-                        <li><i class="fas fa-check"></i> Professional Shoe Care</li>
+                        <li><i class="fas fa-check"></i> Selesai dalam 12 Jam</li>
+                        <li><i class="fas fa-check"></i> Gratis Antar Jemput</li>
+                        <li><i class="fas fa-check"></i> Termasuk: Cuci, Kering, Packing</li>
+                        <li><i class="fas fa-check"></i> Perawatan Sepatu Profesional</li>
                     </ul>
                     <a href="https://wa.me/6281233451988?text=Halo%20Bos%20Laundry%20Pro!%20Saya%20ingin%20memesan%20paket%20*SHOES%20Restore*."
-                        class="btn-order">Order Now</a>
+                        class="btn-order">Pesan Sekarang</a>
                 </div>
             </div>
+        </div>
     </section>
 
     <section class="reviews container">
-        <h2 class="section-title">Verified Customer Reviews</h2>
+        <h2 class="section-title">Ulasan Pelanggan Terverifikasi</h2>
         <div class="review-grid">
             <div class="review-card">
                 <div class="stars">★★★★★</div>
-                <p>"Bos Laundry Pro saved my day with their 2-hour service. Clothes came back spotless and smelling
-                    amazing!"</p>
+                <p>"Bos Laundry Pro menyelamatkan hari saya dengan layanan 2 jam mereka. Pakaian kembali bersih dan
+                    wangi luar biasa!"</p>
                 <div class="author">Anna W. - Kuta</div>
             </div>
             <div class="review-card">
                 <div class="stars">★★★★★</div>
-                <p>"The best laundry in Bali! Free pickup is so convenient, and the quality is always premium."</p>
+                <p>"Laundry terbaik di Bali! Gratis antar jemput sangat memudahkan, dan kualitasnya selalu premium."</p>
                 <div class="author">Mark T. - Seminyak</div>
             </div>
         </div>
     </section>
 
     <section id="coverage" class="coverage container">
-        <h2 class="section-title">Our Service Areas</h2>
+        <h2 class="section-title">Area Layanan Kami</h2>
         <div class="coverage-list">
+            <span><i class="fas fa-map-marker-alt"></i> Pemogan</span>
+            <span><i class="fas fa-map-marker-alt"></i> Denpasar</span>
             <span><i class="fas fa-map-marker-alt"></i> Kuta</span>
             <span><i class="fas fa-map-marker-alt"></i> Legian</span>
             <span><i class="fas fa-map-marker-alt"></i> Seminyak</span>
@@ -152,11 +173,36 @@
         </div>
     </section>
 
+    <section id="location" class="container" style="margin-bottom: 80px; clear: both; position: relative; z-index: 10;">
+        <h2 class="section-title">Lokasi Kami</h2>
+        <div
+            style="border-radius: 20px; overflow: hidden; box-shadow: 0 15px 50px rgba(0,0,0,0.5); height: 450px; background: #eee;">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d985.9231095409758!2d115.18708088816192!3d-8.720727282580913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd247fbab235743%3A0x8db7dcd60b2bd682!2sBos%20Laundry!5e0!3m2!1sen!2sid!4v1773665005960!5m2!1sen!2sid"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <p
+            style="text-align: center; color: white; margin-top: 25px; font-weight: 600; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+            <i class="fas fa-map-marked-alt" style="color: #ff6600;"></i> Pemogan, Kec. Denpasar Sel., Kota Denpasar,
+            Bali
+        </p>
+    </section>
+
     <a href="https://wa.me/6281233451988?text=Halo%20Bos%20Laundry%20Pro!%20Saya%20ingin%20tanya-tanya%20tentang%20layanan%20laundrynya."
         class="floating-wa">
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <footer style="text-align: center; padding: 40px 20px; background: #1a1a1a; color: #fff; font-size: 14px;">
+        <div class="container">
+            <p>&copy; 2026 Bos Laundry Pro. Semua Hak Dilindungi.</p>
+            <p style="font-size: 12px; margin-top: 10px; color: #888;">Layanan Laundry Terpercaya & Tercepat di Bali</p>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

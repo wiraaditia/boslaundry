@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Bos Laundry Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=1.6">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        .admin-container {
+            padding: 100px 20px 50px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .admin-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .package-item {
+            border-bottom: 1px solid #eee;
+            padding: 20px 0;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 2fr 0.8fr 1fr;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .package-item:last-child {
+            border-bottom: none;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        .btn-save {
+            background: #ff6600;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-save:hover {
+            opacity: 0.9;
+        }
+
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo"><a href="index.html">BOS LAUNDRY <span>PRO</span></a></div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Kembali ke Situs</a></li>
+                    <li><a href="#" id="logout-btn">Keluar</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="login-screen" class="login-overlay">
+        <div class="login-box">
+            <h2 style="margin-bottom: 20px; text-align: center;">Login Admin</h2>
+            <form onsubmit="event.preventDefault(); checkAdminPassword();">
+                <input type="text" id="admin-username" placeholder="Username Admin" style="margin-bottom: 20px;" required>
+                <input type="password" id="admin-password" placeholder="Password Admin" style="margin-bottom: 20px;" required>
+                <button type="submit" class="btn-save" style="width: 100%;">Masuk</button>
+            </form>
+            <p id="login-error" style="color: red; margin-top: 10px; display: none;">Password salah!</p>
+        </div>
+    </div>
+
+    <div class="admin-container" id="admin-content" style="display: none;">
+        <div class="admin-header">
+            <h2 class="section-title" style="margin: 0;">Kelola Paket Laundry</h2>
+            <p>Update harga dan deskripsi paket secara real-time.</p>
+        </div>
+
+        <div class="admin-card">
+            <h3 style="margin-bottom: 20px;">+ Tambah Paket Baru</h3>
+            <div class="package-item" style="border: none; background: #f9f9f9; padding: 20px; border-radius: 10px;">
+                <div><input type="text" id="new-name" placeholder="Nama Paket (cth: EXCLUSIVE 1 Jam)"></div>
+                <div>
+                    <input type="number" id="new-price" placeholder="Harga">
+                    <input type="text" id="new-unit" value="kg" placeholder="Unit (kg/Pasang)" style="margin-top: 5px;">
+                </div>
+                <div>
+                    <textarea id="new-desc" rows="2" placeholder="Deskripsi (Pisahkan dengan koma)"></textarea>
+                </div>
+                <div>
+                    <input type="color" id="new-color" value="#ff6600">
+                    <label style="display: block; margin-top: 10px; font-size: 0.8rem;">
+                        <input type="checkbox" id="new-featured"> Tandai sebagai Spesial/Promo
+                    </label>
+                </div>
+                <div>
+                    <button onclick="addPackage()" class="btn-save" style="background: #25D366; width: 100%;">Tambah</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="package-list" class="admin-card">
+            <!-- Paket akan dimuat di sini -->
+            <p>Memuat data paket...</p>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script>
+        let supabaseClient;
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.supabase) {
+                supabaseClient = window.supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
+            } else {
+                console.error("Supabase SDK not loaded!");
+            }
+        });
+
+        // Kredensial Admin
+        const ADMIN_USER = "putujaya";
+        const ADMIN_PASS = "admin123";
+
+        function checkAdminPassword() {
+            const user = document.getElementById('admin-username').value;
+            const pass = document.getElementById('admin-password').value;
+            
+            if (user === ADMIN_USER && pass === ADMIN_PASS) {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('admin-content').style.display = 'block';
+                loadAdminPackages();
+            } else {
+                document.getElementById('login-error').style.display = 'block';
+                document.getElementById('login-error').innerText = "Username atau Password salah!";
+            }
+        }
+
+        async function loadAdminPackages() {
+            if (!supabaseClient) {
+                alert("Supabase belum siap. Silakan refresh halaman.");
+                return;
+            }
+            const { data, error } = await supabaseClient
+                .from('packages')
+                .select('*')
+                .order('level', { ascending: true });
+
+            if (error) {
+                alert("Error: " + error.message);
+                return;
+            }
+
+            const listCont = document.getElementById('package-list');
+            listCont.innerHTML = `
+                <div class="package-item" style="font-weight: bold; border-bottom: 2px solid #333;">
+                    <div>Nama Paket</div>
+                    <div>Harga & Unit</div>
+                    <div>Deskripsi</div>
+                    <div>Warna</div>
+                    <div>Aksi</div>
+                </div>
+            `;
+
+            data.forEach(pkg => {
+                const item = document.createElement('div');
+                item.className = 'package-item';
+                item.innerHTML = `
+                    <div><input type="text" id="name-${pkg.id}" value="${pkg.name}"></div>
+                    <div>
+                        <input type="number" id="price-${pkg.id}" value="${pkg.price}">
+                        <input type="text" id="unit-${pkg.id}" value="${pkg.unit}" style="margin-top: 5px;">
+                    </div>
+                    <div>
+                        <textarea id="desc-${pkg.id}" rows="3">${pkg.description.join(', ')}</textarea>
+                    </div>
+                    <div>
+                        <input type="color" id="color-${pkg.id}" value="${pkg.color || '#ff6600'}">
+                        <label style="display: block; margin-top: 5px; font-size: 0.8rem;">
+                            <input type="checkbox" id="feat-${pkg.id}" ${pkg.is_featured ? 'checked' : ''}> Spesial
+                        </label>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 5px;">
+                        <button onclick="savePackage('${pkg.id}')" class="btn-save">Simpan</button>
+                        <button onclick="deletePackage('${pkg.id}')" class="btn-save" style="background: #d9534f;">Hapus</button>
+                    </div>
+                `;
+                listCont.appendChild(item);
+            });
+        }
+
+        async function addPackage() {
+            const name = document.getElementById('new-name').value;
+            const price = document.getElementById('new-price').value;
+            const unit = document.getElementById('new-unit').value;
+            const desc = document.getElementById('new-desc').value.split(',').map(s => s.trim());
+            const color = document.getElementById('new-color').value;
+            const is_featured = document.getElementById('new-featured').checked;
+
+            if (!name || !price) {
+                alert("Nama dan harga harus diisi!");
+                return;
+            }
+
+            const { error } = await supabaseClient
+                .from('packages')
+                .insert([{ name, price: parseInt(price), unit, description: desc, color, level: 5, is_featured }]);
+
+            if (error) {
+                alert("Gagal menambah: " + error.message);
+            } else {
+                alert("Paket baru berhasil ditambahkan!");
+                // Reset form
+                document.getElementById('new-name').value = '';
+                document.getElementById('new-price').value = '';
+                document.getElementById('new-desc').value = '';
+                document.getElementById('new-featured').checked = false;
+                loadAdminPackages();
+            }
+        }
+
+        async function deletePackage(id) {
+            if (!confirm("Apakah Anda yakin ingin menghapus paket ini?")) return;
+
+            const { error } = await supabaseClient
+                .from('packages')
+                .delete()
+                .eq('id', id);
+
+            if (error) {
+                alert("Gagal menghapus: " + error.message);
+            } else {
+                alert("Paket berhasil dihapus!");
+                loadAdminPackages();
+            }
+        }
+
+        async function savePackage(id) {
+            const name = document.getElementById(`name-${id}`).value;
+            const price = document.getElementById(`price-${id}`).value;
+            const unit = document.getElementById(`unit-${id}`).value;
+            const desc = document.getElementById(`desc-${id}`).value.split(',').map(s => s.trim());
+            const color = document.getElementById(`color-${id}`).value;
+            const is_featured = document.getElementById(`feat-${id}`).checked;
+
+            const { error } = await supabaseClient
+                .from('packages')
+                .update({ name, price: parseInt(price), unit, description: desc, color, is_featured })
+                .eq('id', id);
+
+            if (error) {
+                alert("Gagal menyimpan: " + error.message);
+            } else {
+                alert("Paket berhasil diperbarui!");
+                loadAdminPackages();
+            }
+        }
+
+        document.getElementById('logout-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            location.reload();
+        });
+    </script>
+</body>
+
+</html>

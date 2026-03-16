@@ -455,6 +455,7 @@ nav ul li a:hover {
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
+    padding: 20px 0;
 }
 
 .coverage-list span {
@@ -528,39 +529,35 @@ nav ul li a:hover {
     }
 
     .card {
-        padding: 10px 8px;
-        /* Micro-scale padding */
-        border-radius: 8px;
-        transform: scale(0.98);
-        /* Subtle scale down */
+        padding: 30px 20px;
+        /* Ukuran lebih nyaman */
+        border-radius: 12px;
+        transform: none;
         margin: 0 auto;
+        width: 100%;
     }
 
     .card-grid {
-        gap: 8px;
-        /* Micro-scale gap */
-        max-width: 320px;
-        /* More aggressive max-width */
+        gap: 20px;
+        max-width: 90%;
+        /* Hampir penuh namun tetap sisa sedikit background */
         margin: 0 auto;
     }
 
     .price {
-        font-size: 1.1rem;
-        /* Micro font size */
-        margin-bottom: 8px;
+        font-size: 1.8rem;
+        margin-bottom: 15px;
     }
 
     .card-header {
-        font-size: 0.95rem;
-        /* Micro header */
-        margin-bottom: 8px;
+        font-size: 1.3rem;
+        margin-bottom: 15px;
     }
 
     .card ul li {
-        font-size: 0.75rem;
-        /* Micro list text */
-        margin-bottom: 4px;
-        padding-bottom: 4px;
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+        padding-bottom: 8px;
     }
 
     .btn-main {
@@ -570,10 +567,9 @@ nav ul li a:hover {
     }
 
     .btn-order {
-        padding: 8px;
-        /* Even more compact */
-        font-size: 0.75rem;
-        border-radius: 6px;
+        padding: 15px;
+        font-size: 0.9rem;
+        border-radius: 8px;
     }
 
     .card.featured::after {
@@ -599,7 +595,7 @@ nav ul li a:hover {
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: url('file2.png');
+        background-image: url('gambar 1.png');
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
